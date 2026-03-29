@@ -154,13 +154,20 @@ variable "mgt_public_ips" {
   default     = ["1.1.1.1/32"]
 }
 
+variable "vpc_name" {
+  description = ""
+  type        = string
+  default     = "security-vpc"
+}
+
+
 
 locals {
   cidr_ip_parts = split(".", split("/", var.cidr)[0])
   cidr_prefix   = "${local.cidr_ip_parts[0]}.${local.cidr_ip_parts[1]}"
   vpcs = {
     security_vpc = {
-      name                             = "security-vpc"
+      name                             = var.vpc_name
       cidr                             = "${var.cidr}"
       assign_generated_ipv6_cidr_block = false
       nacls                            = {}
@@ -238,11 +245,11 @@ locals {
 
       routes = {
         mgmt_default = {
-          vpc              = "security_vpc"
+          vpc              = var.vpc_name
           subnet_group     = "mgmt"
           to_cidr          = "0.0.0.0/0"
           destination_type = "ipv4"
-          next_hop_key     = "security_vpc"
+          next_hop_key     = var.vpc_name
           next_hop_type    = "internet_gateway"
         }
       }
