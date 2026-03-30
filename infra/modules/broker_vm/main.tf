@@ -104,12 +104,10 @@ resource "aws_iam_role_policy" "vmimport" {
   })
 }
 
-resource "aws_s3_object" "broker_vm_configuration" {
+resource "local_file" "broker_vm_configuration" {
   count = var.artifact != null ? 1 : 0
 
-  bucket       = aws_s3_bucket.broker_vm.id
-  key          = "configuration.json"
-  content_type = "application/json"
+  filename = "${path.module}/configuration.json"
 
   content = jsonencode({
     Description = "Cortex XSIAM Broker VM"
