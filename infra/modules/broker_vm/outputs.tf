@@ -1,3 +1,3 @@
-output "import_snapshot_command" {
-  value = var.artifact != null ? "aws ec2 import-snapshot --description \"Cortex XSIAM Broker VM\" --disk-container \"file://${path.module}/configuration.json\"" : null
+output "broker_vm_bucket_name" {
+  value = aws_s3_bucket.broker_vm.bucket
 }

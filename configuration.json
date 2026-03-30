@@ -1,0 +1,8 @@
+{
+   "Description":"Cortex XSIAM Broker VM <version>",
+   "Format":"vmdk",
+   "UserBucket":{
+      "S3Bucket":"<your_bucket>",
+      "S3Key":"broker-vm-30.0.63.vmdk"
+   }
+}

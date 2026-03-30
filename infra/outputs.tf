@@ -29,6 +29,6 @@
 #   value       = { for k, v in module.vmseries : k => v.public_ips }
 # }
 
-output "sg_mgt" {
-  value = module.vpc[var.vpc_name].security_group_ids["vmseries_mgmt"] # security_vpc-davila-xsiam-lab-mgmt
+output "broker_vm_bucket_name" {
+  value = var.broker_vm ? module.broker_vm[0].broker_vm_bucket_name : null
 }
