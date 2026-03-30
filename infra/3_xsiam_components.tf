@@ -19,17 +19,6 @@ locals {
   engine_ami_id = try(data.aws_ami.ubuntu2204.id, null)
 }
 
-# Ubuntu 22.04 oficial de Canonical
-data "aws_ami" "ubuntu2204" {
-  most_recent = true
-  owners      = ["099720109477"] # Canonical
-
-  filter {
-    name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
-  }
-}
-
 locals {
   xsiam_components = {
     "${var.name_prefix}-broker_vm" = {

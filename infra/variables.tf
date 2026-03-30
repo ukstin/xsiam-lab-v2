@@ -56,6 +56,24 @@ variable "engine_vm_subnet" {
   default = "vlan1"
 }
 
+variable "linux_deploy" {
+  description = "Linux Ubuntu Deployment"
+  type        = bool
+  default     = false
+}
+
+variable "windows_server_deploy" {
+  description = "Windows Server Deployment"
+  type        = bool
+  default     = false
+}
+
+variable "kali_deploy" {
+  description = "Kali Deployment"
+  type        = bool
+  default     = false
+}
+
 ### VPC
 variable "vpcs" {
   description = <<-EOF

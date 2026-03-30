@@ -1,17 +1,7 @@
-# Windows Server 2022
-data "aws_ami" "jumpbox" {
-  most_recent = true
-  filter {
-    name   = "name"
-    values = ["Windows_Server-2022-English-Full-Base-*"]
-  }
-  owners = ["801119661308"] # Canonical
-}
-
 locals {
   jumpbox = {
     "${var.name_prefix}-jumpbox" = {
-      ami    = data.aws_ami.jumpbox.id
+      ami    = data.aws_ami.windows_server.id
       type   = "t3.medium"
       user   = "Administrator"
       subnet = "mgmt"
