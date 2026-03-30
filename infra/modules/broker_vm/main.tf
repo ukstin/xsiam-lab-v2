@@ -3,7 +3,7 @@ resource "random_id" "broker_vm_suffix" {
 }
 
 resource "aws_s3_bucket" "broker_vm" {
-  bucket = "${var.name_prefix}-broker-vm-${random_id.broker_vm_suffix[0].result}"
+  bucket = "${var.name_prefix}-broker-vm-${random_id.broker_vm_suffix.hex}"
 
   tags = merge(
     var.global_tags,
