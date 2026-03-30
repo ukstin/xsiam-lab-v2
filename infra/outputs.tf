@@ -34,7 +34,7 @@ output "broker_vm_bucket_name" {
 }
 
 output "broker_vm_cp" {
-  value = var.broker_vm ? "aws s3 cp ~/${broker_vm_key} s3://${module.broker_vm[0].broker_vm_bucket_name}/${broker_vm_key}" : null
+  value = var.broker_vm ? "aws s3 cp ~/${var.broker_vm_key} s3://${module.broker_vm[0].broker_vm_bucket_name}/${broker_vm_key}" : null
 }
 
 output "broker_vm_import" {
