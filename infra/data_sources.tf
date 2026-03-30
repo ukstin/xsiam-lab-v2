@@ -24,8 +24,8 @@ data "aws_ami" "kali" {
   owners      = ["aws-marketplace"]
 
   filter {
-    name   = "product-code"
-    values = ["fznsw3f7mq7to"]
+    name   = "name"
+    values = ["kali-last-snapshot-amd64-*"]
   }
 }
 
