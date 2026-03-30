@@ -17,5 +17,5 @@ mgt_public_ips = ["186.31.0.249/32"]
 
 ### XSIAM Components
 
-broker_vm = false
+broker_vm = true
 engine_vm = false
