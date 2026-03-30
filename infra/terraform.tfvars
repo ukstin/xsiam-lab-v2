@@ -13,6 +13,4 @@ ssh_key_name = "xsiam-lab-v2"
 ### VPC
 
 cidr           = "10.10.0.0/16"
-mgt_public_ips = ["1.1.1.1/32"]
-
-### VM-SERIES
+mgt_public_ips = ["162.120.186.158/32"]

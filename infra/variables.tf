@@ -212,6 +212,14 @@ locals {
               protocol    = "tcp"
               cidr_blocks = concat([var.cidr], var.mgt_public_ips)
             }
+            rdp = {
+              description = "RDP"
+              type        = "ingress"
+              from_port   = "3389"
+              to_port     = "3389"
+              protocol    = "tcp"
+              cidr_blocks = concat([var.cidr], var.mgt_public_ips)
+            }
             icmp = {
               description = "Permit ICMP"
               type        = "ingress"
