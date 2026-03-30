@@ -35,15 +35,17 @@ locals {
     "${var.name_prefix}-broker_vm" = {
       deploy  = var.broker_vm
       ami     = local.broker_ami_id
-      type    = "t3.medium"
+      type    = "t3.xlarge"
       user    = "ubuntu"
+      volume = 512
       network = { subnet = var.broker_vm_subnet, public_ip = false } # Always Public IP is FALSE
     }
     "${var.name_prefix}-engine" = {
       deploy  = var.engine_vm
       ami     = local.engine_ami_id
-      type    = "t3.medium"
+      type    = "t3.xlarge"
       user    = "ubuntu"
+      volume = 100
       network = { subnet = var.engine_vm_subnet, public_ip = false } # Always Public IP is FALSE
     }
   }
@@ -70,7 +72,7 @@ resource "aws_instance" "xsiam_components" {
 
   root_block_device {
     volume_type           = "gp3"
-    volume_size           = 40
+    volume_size           = each.value.volume
     delete_on_termination = true
     encrypted             = true
   }
