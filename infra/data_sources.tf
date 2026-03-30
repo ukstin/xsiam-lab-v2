@@ -19,12 +19,12 @@ data "aws_ami" "ubuntu2204" {
   }
 }
 
-data "aws_ami" "kali" {
-  most_recent = true
+data "aws_ami_ids" "kali" {
+  owners = ["aws-marketplace"]
 
   filter {
     name   = "name"
-    values = ["Kali Linux Rolling*"]
+    values = ["*Kali*Linux*"]
   }
 
   filter {
