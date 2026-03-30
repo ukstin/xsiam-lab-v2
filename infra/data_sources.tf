@@ -19,22 +19,13 @@ data "aws_ami" "ubuntu2204" {
   }
 }
 
-data "aws_ami_ids" "kali" {
-  owners = ["aws-marketplace"]
+data "aws_ami" "kali" {
+  most_recent = true
+  owners      = ["aws-marketplace"]
 
   filter {
-    name   = "name"
-    values = ["*Kali*Linux*"]
-  }
-
-  filter {
-    name   = "architecture"
-    values = ["x86_64"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
+    name   = "product-code"
+    values = ["fznsw3f7mq7to"]
   }
 }
 

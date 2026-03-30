@@ -1,8 +1,4 @@
 locals {
-  kali_ami_id = length(data.aws_ami_ids.kali.ids) > 0 ? data.aws_ami_ids.kali.ids[0] : null
-}
-
-locals {
   vms = {
     "${var.name_prefix}-windows-server" = {
       deploy  = var.windows_server_deploy
@@ -22,7 +18,7 @@ locals {
     }
     "${var.name_prefix}-kali" = {
       deploy  = var.kali_deploy
-      ami     = local.kali_ami_id
+      ami     = data.aws_ami.kali.id
       type    = "t3.small"
       user    = "kali"
       volume = 30
