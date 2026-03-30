@@ -14,3 +14,8 @@ ssh_key_name = "xsiam-lab-v2"
 
 cidr           = "10.10.0.0/16"
 mgt_public_ips = ["186.31.0.249/32"]
+
+### XSIAM Components
+
+broker_vm = false
+engine_vm = false

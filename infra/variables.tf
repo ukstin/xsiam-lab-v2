@@ -27,6 +27,20 @@ variable "panos_version" {
   default     = "11.1.4-h7"
 }
 
+## XSIAM Components
+
+variable "broker_vm" {
+  description = "Broker VM Deployment"
+  type        = bool
+  default     = false
+}
+
+variable "engine_vm" {
+  description = "Engine VM Deployment"
+  type        = bool
+  default     = false
+}
+
 ### VPC
 variable "vpcs" {
   description = <<-EOF
