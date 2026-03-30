@@ -5,9 +5,7 @@ module "broker_vm" {
   global_tags = var.global_tags
 }
 
-data "aws_amis" "broker" {
-  most_recent = true
-
+data "aws_ami_ids" "broker" {
   owners = ["self"]
 
   filter {
