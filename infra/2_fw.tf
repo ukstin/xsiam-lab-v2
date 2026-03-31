@@ -111,33 +111,24 @@ locals {
     if !strcontains(k, "mgmt")
   ]
 
-  fw_default_routes = {
-    for item in flatten([
-      for fw_name, eni_map in local.fw_interfaces : [
-        for rt in local.fw_route_tables : [
-          for az, rt_id in rt.unique_route_table_ids : {
-            key            = "${fw_name}-${az}-${rt_id}"
-            route_table_id = rt_id
-            subnet_name    = rt.subnet_names[az]
-
-            target_type = strcontains(rt.subnet_names[az], "public") ? "igw" : "eni"
-            target_id = strcontains(rt.subnet_names[az], "public") ? try(module.vpc[rv.next_hop_key].igw_as_next_hop_set, null) : (
-              strcontains(rt.subnet_names[az], "vlan1") ? eni_map["vlan1"] :
-              strcontains(rt.subnet_names[az], "vlan2") ? eni_map["vlan2"] :
-              null
-            )
-          }
-        ]
-      ]
-    ]) : item.key => item
-    if item.target_id != null
-  }
+  fw_default_routes = merge([
+    for fw_name, eni_map in local.fw_interfaces : merge([
+      for rt_name, rt_data in local.fw_route_tables : {
+        for az, rt_id in rt_data.unique_route_table_ids :
+        "${fw_name}-${rt_name}-${az}" => {
+          route_table_id = rt_id
+          eni_id         = eni_map[regex("vlan[0-9]+", rt_name)]
+        }
+        if can(eni_map[regex("vlan[0-9]+", rt_name)])
+      }
+    ]...)
+  ]...)
 }
 
-# resource "aws_route" "fw_default" {
-#   for_each = local.fw_default_routes
+resource "aws_route" "fw_default" {
+  for_each = local.fw_default_routes
 
-#   route_table_id         = each.value.route_table_id
-#   destination_cidr_block = "0.0.0.0/0"
-#   network_interface_id   = each.value.eni_id
-# }
+  route_table_id         = each.value.route_table_id
+  destination_cidr_block = "0.0.0.0/0"
+  network_interface_id   = each.value.eni_id
+}
