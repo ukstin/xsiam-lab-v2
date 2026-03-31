@@ -29,10 +29,10 @@ output "vmseries_public_ips" {
   value       = { for k, v in module.vmseries : k => v.public_ips }
 }
 
-output "vmseries_private_ips" {
-  description = "Map of private IPs created within `vmseries` module instances."
-  value       = { for k, v in module.vmseries : k => v.private_ips }
-}
+# output "vmseries_private_ips" {
+#   description = "Map of private IPs created within `vmseries` module instances."
+#   value       = { for k, v in module.vmseries : k => v.private_ips }
+# }
 
 # output "subnets" {
 #   value = module.subnet_sets["${var.vpc_name}-${var.name_prefix}-${var.broker_vm_subnet}"]
