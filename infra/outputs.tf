@@ -34,7 +34,7 @@
 # }
 
 output "fw_interfaces" {
-  value = local.fw_interfaces
+  value = local.fw_eni_ids
 }
 
 # output "route_tables" {
