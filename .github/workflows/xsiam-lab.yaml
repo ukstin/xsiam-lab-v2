@@ -25,11 +25,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: hashicorp/setup-terraform@v3
+      - name: Write authcodes to tfvars
+          working-directory: ${{ env.working-directory }}
+          run: |
+            cat >> terraform.tfvars <<EOF
+            authcodes = "${{ env.AUTHCODES }}"
+            EOF
       - name: Terraform Deployment
         id: init
         working-directory: ${{ env.working-directory }}
-        env:
-          TF_VAR_AUTHCODES: ${{ env.AUTHCODES }}
         run: |
           terraform init \
           -backend-config="bucket=${{ env.S3_BACKEND }}" \
