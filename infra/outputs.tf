@@ -14,13 +14,6 @@
 #   description = "modify vim ~/.ssh/config"
 # }
 
-# output "private_ips" {
-#   description = "Private IPs de todas las instancias"
-#   value = {
-#     for name, inst in aws_instance.vm :
-#     name => inst.private_ip
-#   }
-# }
 
 # # FWS
 
@@ -29,26 +22,35 @@ output "vmseries_public_ips" {
   value       = { for k, v in module.vmseries : k => v.public_ips }
 }
 
-output "vmseries_interfaces" {
-  description = "Map of private IPs created within `vmseries` module instances."
-  value       = { for k, v in module.vmseries : k => v.interfaces }
+output "vmseries_private_ips" {
+  value = {
+    for vm_name, vm in module.vmseries :
+    vm_name => {
+      for iface_name, iface in vm.interfaces :
+      iface_name => iface.private_ip
+    }
+  }
 }
 
-# output "subnets" {
-#   value = module.subnet_sets["${var.vpc_name}-${var.name_prefix}-${var.broker_vm_subnet}"]
-# }
+output "vm_access_map" {
+  value = merge(
+    {
+      for name, vm in aws_instance.vms :
+      name => {
+        private_ip = vm.private_ip
+        user       = local.vms[name].user
+      }
+    },
+    {
+      for name, vm in aws_instance.xsiam_components :
+      name => {
+        private_ip = vm.private_ip
+        user       = local.xsiam_components[name].user
+      }
+    }
+  )
+}
 
-# output "fw_interfaces" {
-#   value = local.fw_interfaces
-# }
-
-# output "fw_route_tables" {
-#   value = local.fw_route_tables
-# }
-
-# output "fw_default_routes" {
-#   value = local.fw_default_routes
-# }
 
 output "broker_vm_bucket_name" {
   value = var.broker_vm ? module.broker_vm[0].broker_vm_bucket_name : null
