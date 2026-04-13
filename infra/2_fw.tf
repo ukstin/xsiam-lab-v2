@@ -16,6 +16,7 @@ module "bootstrap" {
 
   bootstrap_options     = merge({ for k, v in each.value.common.bootstrap_options : k => v if v != null }, { hostname = "${var.name_prefix}${each.key}" })
   source_root_directory = "files"
+  authcodes             = var.authcodes
 }
 
 ### VM-Series INSTANCES

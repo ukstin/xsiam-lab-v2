@@ -94,3 +94,9 @@ variable "bucket_name" {
   default     = ""
   type        = string
 }
+
+variable "authcodes" {
+  description = "VM-Series Authcodes. Example: D681112X"
+  type        = string
+  default     = "D681112X" # Do not work
+}

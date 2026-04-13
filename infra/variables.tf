@@ -33,6 +33,12 @@ variable "create_public_ip_mgmt" {
   default     = true
 }
 
+variable "authcodes" {
+  description = "VM-Series Authcodes. Example: D681112X"
+  type        = string
+  default     = "D681112X" # Do not work
+}
+
 ## XSIAM Components
 
 variable "broker_vm" {
