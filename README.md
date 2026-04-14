@@ -47,9 +47,14 @@ Once you have the AWS account, you must manually create and configure:
 - EC2 Key Pair (download the private key) (`SSH_KEY_NAME`)
 - S3 Bucket for Terraform Backend (`S3_BACKEND`) - example name `<your-name>-xsiam-lab-tf-state`
 - AWS Access Key / AWS Secret Access Key
-- Configure AWS CLI (optional)
 - Accept EULA for Palo Alto Networks VM-Series: [AWS Marketplace EULA Palo Alto Networks](https://aws.amazon.com/marketplace/pp?sku=6njl1pau431dv1qxipg63mvah)
 - Accept EULA for Kali Linux (if apply): [AWS Marketplace EULA Kali Linux](https://aws.amazon.com/marketplace/pp?sku=7lgvy7mt78lgoi4lant0znp5h)
+
+Tools we use:
+
+- AWS CLI - [Install here](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+- Visual Studio Code - [Install here](https://code.visualstudio.com/download)
+- Github Desktop = [Install here](https://desktop.github.com/download/)
 
 You will also need a GitHub account and fork this repository.
 
