@@ -1,4 +1,4 @@
-name: Deployment xsiam-lab
+name: Deployment xsiam-lab v2
 
 on:
   push:
